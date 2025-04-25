@@ -1,4 +1,23 @@
+# requirements.txt
+
+# User-specified core dependencies
 googletrans==3.1.0a0
 langdetect==1.0.9
-pyttsx3==2.90
 SpeechRecognition==3.8.1
+pyttsx3==2.90
+
+# Flask and web server related dependencies
+Flask>=2.0 # Using >= to get recent stable versions, pin if needed (e.g., Flask==2.3.2)
+Flask-Cors>=3.0 # For handling requests from Squarespace/browser
+pydub>=0.25 # For audio format conversion
+
+# Optional but recommended for production deployment
+gunicorn # WSGI server for Unix-like systems (Linux/macOS)
+# waitress # WSGI server for Windows systems
+
+# Note: googletrans can sometimes be unreliable as it relies on unofficial APIs.
+# Consider alternatives like google-cloud-translate if stability is paramount.
+
+# Note: pyttsx3 is included as requested, but it's NOT used for speaking
+# audio back to the user in the web version (browser's SpeechSynthesis is used).
+# It would only be needed if generating audio files *on the server*.

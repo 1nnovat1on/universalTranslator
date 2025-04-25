@@ -1,3 +1,6 @@
+import tkinter
+from tkinter import ttk
+
 # Built for Windows which is by far the most used and accessible operating system, don't kid yourself now.
 # ABSTERGO LLC | COLIN JACKSON | 1-16-2023
 import speech_recognition as sr
@@ -71,6 +74,7 @@ def translate(text = None):
     return textToSay
 
 def main():
+    
 
     while AWAKE:
         try:
@@ -96,17 +100,34 @@ def main():
         except sr.RequestError as e:
             print("Error: {0}".format(e))
 
+    
+root = tkinter.Tk()
+root.geometry("500x500")
+root.title("Universal Translator")
 
-# helper functions
-# you must have the voice text-to-speech module for your target language installed to hear correct pronunciation
+# Create a label
+source_label = tkinter.Label(root, text="Source Language")
+source_label.pack()
 
-# detects available voices in Windows
-def getVoices():
+# Create a Combobox
+source_language_var = tkinter.StringVar()
+source_language_var.set("en")
+source_language_select = ttk.Combobox(root, textvariable=source_language_var, values=["en", "fr", "es", "de"])
+source_language_select.pack()
 
-    engine = pyttsx3.init()
+# Create a label
+target_label = tkinter.Label(root, text="Target Language")
+target_label.pack()
 
-    for voice in engine.getProperty('voices'):
-        print(voice)
+# Create a Combobox
+target_language_var = tkinter.StringVar()
+target_language_var.set("fr")
+target_language_select = ttk.Combobox(root, textvariable=target_language_var, values=["en", "fr", "es", "de"])
+target_language_select.pack()
 
-main()
-#getVoices()
+# Create a button
+translate_button = tkinter.Button(root, text="Translate", command=main)
+translate_button.pack()
+
+
+root.mainloop()
